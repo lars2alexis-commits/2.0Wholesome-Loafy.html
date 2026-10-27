@@ -1,0 +1,246 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Wholesome Loafy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+/* THEME TOKENS: change colours, fonts, radius here. No business logic lives in this block. */
+:root{--cream:#faf5ea;--oat:#efe5d0;--oat2:#e4d6b9;--caramel:#b5693a;--caramel-d:#955329;--sage:#8da38a;--sage-d:#4f6a4c;--espresso:#3a2a20;--mut:#6f5f50;--line:#e2d5bb;--bad:#9c3d2a;--r:16px;--font-head:'Fraunces',Georgia,serif;--font-body:'DM Sans',system-ui,sans-serif;--pad:clamp(16px,3vw,32px);color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}html,body{margin:0;height:auto}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--cream);color:var(--espresso);font:16px/1.6 var(--font-body)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--cream);z-index:10}
+h1,h2,h3{font-family:var(--font-head);font-weight:600;line-height:1.15;letter-spacing:-.01em}h2{font-size:clamp(1.6rem,3vw,2.2rem);margin:0 0 6px}
+a{color:var(--caramel-d);cursor:pointer}:focus-visible{outline:3px solid var(--sage-d);outline-offset:2px}
+header{display:flex;align-items:center;gap:6px 20px;padding:14px var(--pad);position:sticky;top:env(safe-area-inset-top,0px);background:var(--cream);z-index:6;border-bottom:1px solid var(--line)}
+.brand{font:600 1.5rem var(--font-head);margin-right:auto;cursor:pointer;color:var(--espresso)}
+header a,header summary{color:var(--espresso);text-decoration:none;font-weight:500;cursor:pointer;list-style:none}header summary::-webkit-details-marker{display:none}
+.menu{position:relative}.menu div{position:absolute;right:0;top:130%;background:var(--cream);border:1px solid var(--line);border-radius:12px;padding:8px;min-width:190px;box-shadow:0 12px 30px #3a2a2022;display:grid}.menu div a{padding:7px 10px;border-radius:8px}.menu div a:hover{background:var(--oat)}
+.bagn{display:inline-flex;gap:6px;align-items:center}.badge{background:var(--caramel);color:#fff;border-radius:99px;font-size:.78rem;padding:0 7px;min-width:20px;text-align:center}
+main{max-width:1240px;margin:auto;padding:var(--pad)}
+.hero{display:grid;grid-template-columns:7fr 3fr;gap:var(--pad);align-items:stretch}
+.car{position:relative;border-radius:22px;overflow:hidden;min-height:440px;background:var(--oat);touch-action:pan-y}
+.sl{position:absolute;inset:0;opacity:0;transition:opacity .9s ease}.sl.on{opacity:1}
+.ph,.sl img,.pimgw img,.pdimg img{width:100%;height:100%;object-fit:cover;display:block}
+.ph{position:relative;min-height:100%;background:radial-gradient(ellipse 36% 24% at 50% 52%,var(--c1) 0 97%,#0000),radial-gradient(ellipse 42% 30% at 50% 56%,var(--c2) 0 97%,#0000),linear-gradient(160deg,#f4eada,var(--oat2))}
+.ph i{position:absolute;left:12px;bottom:10px;font:.72rem var(--font-body);color:var(--mut);font-style:normal;background:#faf5eacc;padding:2px 8px;border-radius:99px}
+.ph0{--c1:#c58a52;--c2:#8c5a34}.ph1{--c1:#a8b58a;--c2:#d9b872}.ph2{--c1:#d7a574;--c2:#a86a3b}.ph3{--c1:#e7cfa0;--c2:#b58f66}
+.ov{position:absolute;left:0;right:0;bottom:0;padding:clamp(20px,4vw,44px) clamp(20px,4vw,44px) 64px;background:linear-gradient(0deg,#2a1a0fcc,#2a1a0f00);color:#fff;z-index:2}
+.ov h1{font-size:clamp(1.8rem,4.2vw,3.2rem);margin:0 0 16px;max-width:15ch;color:#fff}
+.ar{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:42px;height:42px;border-radius:50%;padding:0;background:#faf5eae6;color:var(--espresso);font-size:1.5rem;line-height:1}.ar.l{left:12px}.ar.r{right:12px}.ar:hover{background:#fff}
+.dots{position:absolute;left:0;right:0;bottom:18px;display:flex;justify-content:center;gap:8px;align-items:center;z-index:3}
+.dots .d{width:10px;height:10px;border-radius:50%;padding:0;background:#fff8;border:0}.dots .d.on{background:#fff;width:24px;border-radius:6px;transition:width .3s}.dots .pz{background:#faf5eae6;color:var(--espresso);padding:2px 10px;font-size:.78rem;border-radius:99px}
+.panel{display:flex;flex-direction:column;gap:14px}
+.stat{background:var(--oat);border-radius:var(--r);padding:16px 18px;border-left:5px solid var(--sage)}.stat.shut{border-left-color:var(--caramel)}
+.stat b.t{font:600 1.1rem var(--font-head);display:block}.stat .cdw{margin-top:6px;font-weight:700;color:var(--sage-d)}.stat.shut .cdw{color:var(--caramel-d)}
+.pl{display:flex;flex-direction:column}.pl a{padding:13px 4px;border-bottom:1px solid var(--line);text-decoration:none;color:var(--espresso);display:flex;justify-content:space-between;gap:10px;transition:padding .2s,color .2s}.pl a:hover{padding-left:12px;color:var(--caramel-d)}
+.pl a b{font:600 1.15rem var(--font-head)}.pl a span{color:var(--mut);font-size:.88rem;text-align:right;align-self:center}
+.cartb{display:flex;justify-content:center;gap:10px;align-items:center;padding:12px;border-radius:12px;background:var(--espresso);color:#fff;border:0;font-weight:700}.cartb:hover{background:#000}
+section.shopS{padding:clamp(40px,6vw,72px) 0 10px}section.shopS>p{margin:0 0 24px;color:var(--mut)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:clamp(16px,2.4vw,28px)}
+.pc{display:flex;flex-direction:column;gap:6px}.pc h3{margin:8px 0 0;font-size:1.25rem}.pc p{margin:0;color:var(--mut);font-size:.95rem}
+.pimgw{aspect-ratio:4/5;border-radius:18px;overflow:hidden;cursor:pointer;background:var(--oat)}.pimgw .ph,.pimgw img{transition:transform .6s ease}.pimgw:hover .ph,.pimgw:hover img{transform:scale(1.05)}
+.meta{display:flex;justify-content:space-between;gap:8px;align-items:baseline;margin-top:2px}.meta b{font:600 1.15rem var(--font-head)}
+.stk{font-size:.85rem;font-weight:500;color:var(--sage-d)}.stk.low{color:var(--caramel-d)}.stk.out{color:var(--bad)}
+.pc button{margin-top:auto}
+button,.btn{font:600 .95rem var(--font-body);background:var(--caramel);color:#fff;border:0;border-radius:99px;padding:10px 20px;cursor:pointer;transition:background .2s,transform .15s}button:hover{background:var(--caramel-d)}button:active{transform:scale(.98)}
+button.alt{background:transparent;color:var(--caramel-d);border:1.5px solid var(--caramel)}button.alt:hover{background:var(--oat)}button.sm{padding:3px 11px;font-size:.85rem}button:disabled{opacity:.45;cursor:not-allowed}
+input,select,textarea{font:inherit;color:var(--espresso);background:#fffaf0;border:1px solid var(--oat2);border-radius:10px;padding:8px 10px;max-width:100%}textarea{width:100%}
+.back{display:inline-block;margin-bottom:14px;text-decoration:none;font-weight:500}
+.pd{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,56px);align-items:start}.pdimg{aspect-ratio:1/1;border-radius:22px;overflow:hidden;background:var(--oat)}
+.pdi h1{font-size:clamp(1.8rem,3.4vw,2.6rem);margin:0}.price{font:600 1.5rem var(--font-head);color:var(--caramel-d);margin:4px 0 10px}
+.opt{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}.opt label{border:1.5px solid var(--oat2);border-radius:99px;padding:6px 16px;cursor:pointer}.opt label:has(input:checked){border-color:var(--caramel);background:var(--oat)}.opt input{accent-color:var(--caramel)}
+.acc{margin-top:36px;max-width:820px}details{border-top:1px solid var(--line);padding:10px 0}summary{cursor:pointer;font:600 1.1rem var(--font-head)}.alg{background:#f5e3d0;border-radius:10px;padding:10px 14px}
+.card{background:#fffaf0;border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.warn{color:var(--bad)}.ok{color:var(--sage-d)}.mut{color:var(--mut);font-size:.92rem}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:8px 0}.tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}.x{overflow-x:auto}
+table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+.bar{padding:8px 16px;border-radius:99px;margin-bottom:18px;background:var(--oat);display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center;font-size:.92rem}
+.th{width:64px;height:64px;border-radius:10px;overflow:hidden}.th .ph i{display:none}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:84px;background:var(--espresso);color:#fff;padding:12px 20px;border-radius:14px;z-index:20;display:none;box-shadow:0 10px 30px #0004;max-width:92vw}#toast a{color:#f1c9a3;font-weight:700}
+.foot{margin-top:40px;color:var(--mut);font-size:.85rem}
+#demo{position:fixed;right:12px;bottom:12px;width:min(370px,calc(100vw - 24px));background:var(--espresso);color:#f6ecda;border-radius:14px;z-index:9;padding:4px 12px;max-height:75vh;overflow:auto;font-size:.82rem;box-shadow:0 8px 24px #0004}
+#demo summary{font:500 .82rem var(--font-body);padding:6px 0}#demo p{color:#cdbba3}#demo button{margin:2px;background:var(--sage);color:#1c140e;padding:5px 10px;font-size:.8rem}#demo button.r{background:#e0a77a}#tests div{padding:2px 0}
+@media(max-width:860px){.hero,.pd{grid-template-columns:1fr}.car{min-height:380px}.menu div{right:auto;left:0}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style></head><body>
+<header id="nav"></header><main id="app"></main><div id="toast" role="status"></div>
+<div id="demo"><details><summary>Testing panel · <span id="dclk"></span></summary>
+<p class="mut" style="color:#c9b79f">Simulated Singapore clock, separate from the real one. Jumps are relative to the current simulated week.</p>
+<div><b>Clock:</b>
+<button onclick="jump(0,0,0)">Mon 12:00 AM</button><button onclick="jump(0,0,1)">Mon 12:01 AM</button><button onclick="jump(2,12,0)">Wed noon</button><button onclick="jump(4,23,59)">Fri 11:59 PM</button><button onclick="jump(5,0,0)">Sat 12:00 AM</button><button onclick="jump(6,10,0)">Sunday</button><button onclick="jump(7,0,1)">Next Mon 12:01 AM</button><button onclick="jump(8,9,0)">Next Tue</button><button onclick="adv(1)">+1 min</button><button onclick="adv(60)">+1 hr</button><button onclick="useReal()">Use real clock</button></div>
+<div><b>Stock:</b><button onclick="setLeft('sourdough',3)">Sourdough: 3 left</button><button onclick="setLeft('sourdough',0)">Sell out sourdough</button><button onclick="rival(2)">Other customer buys 2 sourdough</button><button onclick="togglePause()" class="r">Admin pause/resume</button></div>
+<div><b>Checks:</b><button onclick="runTests()">Run all automated scenario checks</button><button class="r" onclick="if(confirm('Reset all demo data?')){S=defaults();save();go()}">Reset all data</button></div>
+<div id="tests"></div></details></div>
+<script>
+const DY=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],MO=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],D=864e5,KEY='wl_v1';
+const SAMPLE='Sample content, edit in Admin.';
+const mk=(id,name,price,emoji,slice,desc,fl,sv,ing,al)=>({id,name,price,cap:20,emoji,slice,desc,recipe:'',info:{flavour:fl,serving:sv,ingredients:ing,nutrition:'Not yet provided. Add values from a verified source before publishing.',allergens:al,storage:'Sample: best enjoyed fresh. Add your own storage and reheating guidance.',preorder:'Orders open Mon 12:01 AM to Fri 11:59 PM (SGT). Baked Sunday. Pickup Sun or Mon; delivery Sun only.'}});
+function defaults(){return{demo:true,sim:Date.UTC(2026,9,26,9,0),settings:{paused:false,msg:'Our bakery is taking a short break!',pauseWeeks:[],fee:4,pickupTimes:'Sun 2–6 PM; Mon 6–9 PM (sample, edit)',delHours:'Sun 12–5 PM (sample, edit)',area:'Sample: central Singapore (edit)'},
+products:[mk('sourdough','Signature Sourdough Loaf',12,'🍞',true,'Our slow-fermented everyday loaf.',SAMPLE+' Tangy, crisp crust, open chewy crumb.',SAMPLE+' Weight and servings to be confirmed.',SAMPLE+' e.g. flour, water, salt, starter (confirm).','Sample: contains wheat (gluten). Confirm full list.'),
+mk('focaccia','Rosemary Focaccia',10,'🌿',false,'Olive-oil rich, rosemary-scented flatbread.',SAMPLE+' Soft, dimpled, herby.',SAMPLE,SAMPLE+' Confirm.','Sample: contains wheat (gluten). Confirm full list.'),
+mk('cinnamon','Homemade Cinnamon Rolls',8,'🥐',false,'Soft rolls swirled with cinnamon.',SAMPLE+' Sweet, spiced, pillowy.',SAMPLE,SAMPLE+' Confirm.','Sample: likely wheat, milk, egg. Confirm full list.')],
+batches:{},orders:[],cart:[],points:{},seq:1,email:'',view:'home',arg:'',tab:'orders'}}
+let S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}if(!S||!S.products)S=defaults();
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const now=()=>S.demo?S.sim:Date.now()+8*36e5;
+const iso=ms=>new Date(ms).toISOString().slice(0,10);
+const fd=i=>{const d=new Date(i+'T00:00:00Z');return DY[d.getUTCDay()]+', '+d.getUTCDate()+' '+MO[d.getUTCMonth()]};
+const ft=ms=>{const d=new Date(ms),p=n=>String(n).padStart(2,'0');return DY[d.getUTCDay()]+' '+d.getUTCDate()+' '+MO[d.getUTCMonth()]+' '+d.getUTCFullYear()+', '+p(d.getUTCHours())+':'+p(d.getUTCMinutes())+':'+p(d.getUTCSeconds())+' SGT'};
+const prod=id=>S.products.find(p=>p.id==id);
+const addD=(i,n)=>iso(Date.parse(i+'T00:00:00Z')+n*D);
+function cycle(t){const d=(new Date(t).getUTCDay()+6)%7,mon=t-t%D-d*D,openAt=mon+6e4,closeAt=mon+5*D,sunday=iso(mon+6*D);
+const paused=S.settings.paused||S.settings.pauseWeeks.includes(sunday),sched=t>=openAt&&t<closeAt;
+return{mon,sunday,sched,paused,open:sched&&!paused,next:sched?closeAt:(t<openAt?openAt:mon+7*D+6e4),label:sched?'Orders close in':'Orders open in'}}
+function getBatch(sun){const b=S.batches[sun]=S.batches[sun]||{};S.products.forEach(p=>{if(!b[p.id])b[p.id]={cap:p.cap,sold:0}});return b} // idempotent: created once per Sunday, never carries over
+const rem=(pid,sun)=>{const b=getBatch(sun)[pid];return Math.max(0,b.cap-b.sold)};
+function placeOrder(cart,f,cust,rw){ // "server-side" order logic: re-validates everything
+const c=cycle(now());
+if(c.paused)return{ok:0,msg:S.settings.msg+' Ordering is paused.'};
+if(!c.sched)return{ok:0,msg:'Ordering is closed. It reopens Monday 12:01 AM (Singapore time).'};
+if(!cart.length)return{ok:0,msg:'Your cart is empty.'};
+if(!cust.name||!cust.email)return{ok:0,msg:'Please enter your name and email.'};
+if(f.type==='delivery'&&(f.day!=='sun'||!f.addr))return{ok:0,msg:'Delivery is Sunday only and needs an address.'};
+const need={};cart.forEach(l=>need[l.pid]=(need[l.pid]||0)+l.qty);
+for(const pid in need){const r=rem(pid,c.sunday);if(need[pid]>r)return{ok:0,msg:r?`Only ${r} left of ${prod(pid).name}, but you asked for ${need[pid]}. Reduce the quantity.`:`${prod(pid).name} is sold out for this week.`}}
+const items=cart.map(l=>({pid:l.pid,name:prod(l.pid).name,slice:l.slice,qty:l.qty,price:prod(l.pid).price}));
+const sub=items.reduce((a,i)=>a+i.price*i.qty,0),bal=S.points[cust.email]||0;let disc=0,cost=0;
+if(rw==='r5'){cost=50;disc=5}else if(rw==='r10'){cost=100;disc=10}else if(rw&&rw.startsWith('free:')){cost=200;const p=items.find(i=>i.pid==rw.slice(5));if(!p)return{ok:0,msg:'Add the free-item product to your cart first.'};disc=p.price}
+if(cost>bal)return{ok:0,msg:`Not enough points (${bal}).`};disc=Math.min(disc,sub);
+const fee=f.type==='delivery'?+S.settings.fee:0,pts=Math.floor(sub-disc);
+for(const pid in need)getBatch(c.sunday)[pid].sold+=need[pid]; // atomic: validate+deduct in one synchronous step
+S.points[cust.email]=bal-cost+pts;
+const o={id:'WL'+String(S.seq++).padStart(4,'0'),sun:c.sunday,placed:ft(now()),items,fulfil:f,name:cust.name,email:cust.email,sub,disc,fee,total:sub-disc+fee,status:'confirmed',pts,cost};
+S.orders.push(o);save();return{ok:1,order:o}}
+function setStatus(id,st){const o=S.orders.find(x=>x.id==id);if(!o||o.status===st)return;
+if(st==='cancelled'&&o.status!=='cancelled'){if(iso(now())<=o.sun){const b=getBatch(o.sun);o.items.forEach(i=>b[i.pid].sold-=i.qty)}S.points[o.email]=(S.points[o.email]||0)-o.pts+o.cost}
+if(o.status==='cancelled'&&st!=='cancelled'){const b=getBatch(o.sun);const need={};o.items.forEach(i=>need[i.pid]=(need[i.pid]||0)+i.qty);for(const k in need)if(need[k]>rem(k,o.sun))return alert('Not enough stock to reinstate.');o.items.forEach(i=>b[i.pid].sold+=i.qty);S.points[o.email]=(S.points[o.email]||0)+o.pts-o.cost}
+o.status=st;save();go()}
+const go=(v,a)=>{if(v){S.view=v;S.arg=a||'';scrollTo(0,0)}save();render()};
+function jump(d,h,m){S.demo=true;S.sim=cycle(now()).mon+d*D+(h*60+m)*6e4;go()}
+const adv=m=>{S.demo=true;S.sim+=m*6e4;go()};
+function useReal(){S.demo=false;go()}
+function setLeft(pid,n){const c=cycle(now()),b=getBatch(c.sunday)[pid];b.sold=Math.max(0,b.cap-n);go()}
+function rival(n){const r=placeOrder([{pid:'sourdough',slice:'whole',qty:n}],{type:'pickup',day:'sun'},{name:'Other customer',email:'other@demo.sg'},'');alert(r.ok?'Another customer bought '+n+' sourdough.':r.msg);go()}
+function togglePause(){S.settings.paused=!S.settings.paused;go()}
+// ---------- UI (presentation layer: reads state, calls the logic above) ----------
+const money=n=>'S$'+(+n).toFixed(2).replace(/\.00$/,'');
+function cd(){const t=now(),c=cycle(t);let s=Math.max(0,Math.floor((c.next-t)/1e3)),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);return(d?d+'d ':'')+h+'h '+m+'m '+s%60+'s'}
+const ensure=()=>{S.slides=S.slides||['Signature sourdough','Rosemary focaccia','Cinnamon rolls','Our cosy kitchen'].map(cap=>({cap,img:''}));S.club=S.club||[]};
+const imgH=(src,label,i)=>src?`<img src="${src}" alt="${esc(label)}">`:`<div class="ph ph${(i||0)%4}" role="img" aria-label="${esc(label)} photo placeholder"><i>Photo placeholder: replace in Admin</i></div>`;
+function statusBar(){const c=cycle(now());
+if(c.paused)return`<div class="bar"><b class="warn">${esc(S.settings.msg)}</b><span class="mut">Ordering is paused. Browsing is still open.</span></div>`;
+return`<div class="bar"><b class="${c.open?'ok':'warn'}">${c.open?'Orders open':'Orders closed'}</b><span>${c.label} <b class="cd">${cd()}</b></span><span class="mut">${fd(c.sunday)} bake</span></div>`}
+function statusPanel(c){let t,sub,lab=c.label;
+if(c.paused){t=esc(S.settings.msg);sub='Browsing is open, but ordering is paused for now.';lab=''}
+else if(c.open){t='Orders open: this week’s Sunday bake';sub='Pre-orders close Friday at 11:59 PM. Baking on '+fd(c.sunday)+'.'}
+else{t='Our ovens are getting ready!';sub='Orders reopen Monday at 12:01 AM.'}
+return`<div class="stat ${c.open?'':'shut'}" aria-live="polite"><b class="t">${t}</b><span>${sub}</span>${lab?`<div class="cdw">${lab} <span class="cd">${cd()}</span></div>`:''}</div>`}
+const reopenMsg=c=>c.paused?esc(S.settings.msg):'Pre-orders reopen Monday at 12:01 AM.';
+// View-Only Mode is a DISPLAY rule only: it never writes to S.batches, so real stock is preserved.
+function avail(p){const c=cycle(now()),r=rem(p.id,c.sunday);
+if(!c.open)return{r,closed:true,cls:'out',txt:'Ordering Closed — 0 Available to Order'};
+return{r,cls:r===0?'out':r<=5?'low':'',txt:r===0?'Sold Out for This Week':r<=5?(p.id=='sourdough'?`Only ${r} loaves left for this week’s bake!`:`Only ${r} left for this week’s bake!`):`${r} left this week`}}
+const btnLabel=(p,c)=>c.open&&rem(p.id,c.sunday)>0?'View & Order':'View Details';
+const cardP=(p,i)=>{const a=avail(p),c=cycle(now()),L=btnLabel(p,c);return`<article class="pc"><div class="pimgw" role="link" tabindex="0" aria-label="View ${esc(p.name)}" onclick="go('product','${p.id}')" onkeydown="if(event.key=='Enter')go('product','${p.id}')">${imgH(p.img,p.name,i)}</div><h3>${esc(p.name)}</h3><p>${esc(p.desc)}</p><div class="meta"><b>${money(p.price)}</b><span class="stk ${a.cls}">${a.txt}</span></div>${a.closed?`<p class="mut">${reopenMsg(c)}</p>`:''}<button class="${L=='View Details'?'alt':''}" onclick="go('product','${p.id}')">${L.replace('&','&amp;')}</button></article>`};
+const bag='<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8a3 3 0 016 0"/></svg>';
+const cartN=()=>S.cart.reduce((a,l)=>a+l.qty,0);
+function goShop(){go('home');setTimeout(()=>{const e=document.getElementById('shop');if(e)e.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})},40)}
+let ci=0,cpz=false,tx=0;
+function paintC(){document.querySelectorAll('.sl').forEach((e,i)=>e.classList.toggle('on',i==ci));document.querySelectorAll('.dots .d').forEach((e,i)=>e.classList.toggle('on',i==ci))}
+function slide(d){ci=(ci+d+S.slides.length)%S.slides.length;paintC()}
+function dot(i){ci=i;paintC()}
+function pz(b){cpz=!cpz;b.textContent=cpz?'Play':'Pause'}
+const tS=e=>{tx=e.touches[0].clientX},tE=e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>40)slide(d<0?1:-1)};
+setInterval(()=>{if(!cpz&&S.view=='home'&&!matchMedia('(prefers-reduced-motion: reduce)').matches)slide(1)},5000);
+function render(){ensure();const v=S.view,c=cycle(now());
+$nav.innerHTML=`<span class="brand" onclick="go('home')">Wholesome Loafy</span><a onclick="goShop()">Shop</a><details class="menu"><summary>Menu</summary><div><a onclick="go('story')">Our Story</a><a onclick="go('how')">How to Order</a><a onclick="go('account')">Loafy Rewards</a><a onclick="go('club')">Bread Club</a><a onclick="go('faq')">Contact &amp; FAQ</a><a onclick="go('admin')">Admin</a></div></details><a class="bagn" onclick="go('cart')" aria-label="Cart, ${cartN()} items">${bag}<span class="badge">${cartN()}</span></a>`;
+const m={home,shop:home,product,cart,story,how,account,club,faq,admin}[v]||home;
+$app.innerHTML=(v=='admin'||v=='home'?'':statusBar())+m(c)+`<p class="foot">Prototype: data is stored only in this browser and payment is simulated. Not production-ready.</p>`;tick()}
+function home(c){const bal=S.email?(S.points[S.email]||0):null,PL=[['story','Our Story','Student-run, small-batch, slow-made'],['how','How to Order','Order Mon–Fri, baked Sunday'],['account','Loafy Rewards',bal===null?'Check your points':bal+' points'],['club','Bread Club','Join the interest list'],['faq','Contact & FAQ','Quick answers']];
+return`<div class="hero"><div class="car" id="car" ontouchstart="tS(event)" ontouchend="tE(event)">${S.slides.map((s,i)=>`<div class="sl ${i==ci?'on':''}">${imgH(s.img,s.cap,i)}</div>`).join('')}<div class="ov"><h1>Slow-made. Freshly baked. Made with love.</h1><button onclick="goShop()">Shop Our Bakes</button></div><button class="ar l" aria-label="Previous slide" onclick="slide(-1)">‹</button><button class="ar r" aria-label="Next slide" onclick="slide(1)">›</button><div class="dots">${S.slides.map((s,i)=>`<button class="d ${i==ci?'on':''}" aria-label="Slide ${i+1}" onclick="dot(${i})"></button>`).join('')}<button class="pz" onclick="pz(this)">${cpz?'Play':'Pause'}</button></div></div>
+<aside class="panel">${statusPanel(c)}<nav class="pl" aria-label="Explore">${PL.map(p=>`<a onclick="go('${p[0]}')"><b>${p[1]}</b><span>${p[2]}</span></a>`).join('')}</nav><button class="cartb" onclick="go('cart')">${bag} My Cart (${cartN()})</button></aside></div>
+<section class="shopS" id="shop"><h2>Shop Our Bakes</h2><p>Freshly made in small batches, just for you.</p>${c.open?'':`<p class="stk out" style="font-size:1rem">${reopenMsg(c)}</p>`}<div class="grid">${S.products.map(cardP).join('')}</div></section>`}
+function product(c){const p=prod(S.arg);if(!p)return home(c);const a=avail(p),inCart=S.cart.filter(l=>l.pid==p.id).reduce((x,l)=>x+l.qty,0),left=a.r-inCart,can=c.open&&left>0,i=p.info,sun=c.sunday,mon=addD(sun,1);
+const why=c.paused?S.settings.msg:!c.sched?reopenMsg(c):a.r===0?'Sold out for this week.':left<=0?'Your cart already holds every remaining unit.':'';
+return`<a class="back" onclick="goShop()">← Back to shop</a><div class="pd"><div class="pdimg">${imgH(p.img,p.name,S.products.indexOf(p))}</div><div class="pdi"><h1>${esc(p.name)}</h1><div class="price">${money(p.price)}</div><p>${esc(p.desc)}</p><p class="mut">Sunday baking batch: <b>${fd(sun)}</b></p><p class="stk ${a.cls}" style="font-size:1rem">${a.txt}</p>
+${p.slice?`<b>Would you like your sourdough sliced?</b><div class="opt"><label><input type="radio" name="sl" value="sliced" checked ${can?'':'disabled'}> Sliced</label><label><input type="radio" name="sl" value="whole" ${can?'':'disabled'}> Unsliced (Whole Loaf)</label></div><div class="mut">No extra charge. Both choices share the same weekly stock; add each separately.</div>`:''}
+<div class="row"><label>Quantity <select id="qty" ${can?'':'disabled'}>${Array.from({length:Math.max(left,1)},(_,k)=>`<option>${k+1}</option>`).join('')}</select></label><button ${can?'':'disabled'} onclick="addCart('${p.id}')">Add to cart</button></div><div class="warn">${why}</div></div></div>
+<div class="acc">${[['Flavour & Texture','flavour'],['Serving Size','serving'],['Ingredients','ingredients'],['Nutritional Information','nutrition'],['Allergen Information','allergens'],['Storage & Reheating','storage']].map(x=>`<details><summary>${x[0]}</summary><p ${x[1]=='allergens'?'class="alg"':''}>${esc(i[x[1]])}</p></details>`).join('')}<details><summary>Pre-order &amp; Fulfilment</summary><p>${esc(i.preorder)}</p><p>This batch: pickup ${fd(sun)} or ${fd(mon)}; local delivery ${fd(sun)} only (${money(S.settings.fee)}).</p></details></div>`}
+function toast(h){const t=$('#toast');t.innerHTML=h;t.style.display='block';clearTimeout(window._tt);window._tt=setTimeout(()=>t.style.display='none',6000)}
+function addCart(pid){const p=prod(pid),q=+$('#qty').value,opt=p.slice?document.querySelector('input[name=sl]:checked').value:null,c=cycle(now());
+if(!c.open)return alert('Ordering is closed. '+reopenMsg(c));const tot=S.cart.filter(l=>l.pid==pid).reduce((a,l)=>a+l.qty,0)+q;if(tot>rem(pid,c.sunday))return alert('Only '+rem(pid,c.sunday)+' left. Choose a smaller quantity.');
+const ex=S.cart.find(l=>l.pid==pid&&l.slice==opt);ex?ex.qty+=q:S.cart.push({pid,slice:opt,qty:q});save();render();
+toast(`Added ${q} × ${esc(p.name)}${sl(opt)}. <a onclick="go('cart');$('#toast').style.display='none'">View cart</a> · <a onclick="goShop();$('#toast').style.display='none'">Keep shopping</a>`)}
+const sl=s=>s==='sliced'?' (Sliced)':s==='whole'?' (Unsliced)':'';
+function cart(c){const f=S.fulf=S.fulf||{type:'pickup',day:'sun'},sub=S.cart.reduce((a,l)=>a+l.qty*prod(l.pid).price,0),sun=c.sunday,mon=addD(sun,1),bal=S.points[S.email]||0;
+if(!S.cart.length)return`<h2>Cart</h2><p>Your cart is empty. <a onclick="go('shop')">Browse the shop</a></p>`;
+return`<h2>Cart and checkout</h2><div class="x"><table>${S.cart.map((l,k)=>`<tr><td>${esc(prod(l.pid).name)}${sl(l.slice)}</td><td><button class="sm alt" onclick="qchg(${k},-1)">−</button> ${l.qty} <button class="sm alt" onclick="qchg(${k},1)">+</button></td><td>${money(l.qty*prod(l.pid).price)}</td></tr>`).join('')}</table></div>
+<div class="card" style="margin:14px 0"><b>Fulfilment for the ${fd(sun)} baking batch</b>
+<div class="row"><label><input type="radio" name="ft" ${f.type=='pickup'&&f.day=='sun'?'checked':''} onchange="setF('pickup','sun')"> Pickup ${fd(sun)} (free)</label><label><input type="radio" name="ft" ${f.type=='pickup'&&f.day=='mon'?'checked':''} onchange="setF('pickup','mon')"> Pickup ${fd(mon)} (free)</label><label><input type="radio" name="ft" ${f.type=='delivery'?'checked':''} onchange="setF('delivery','sun')"> Delivery ${fd(sun)} (${money(S.settings.fee)})</label></div>
+<div class="mut">${f.type=='delivery'?'Hours: '+esc(S.settings.delHours)+'. Area: '+esc(S.settings.area):'Pickup times: '+esc(S.settings.pickupTimes)}</div>${f.type=='delivery'?'<div class="row"><input id="addr" placeholder="Delivery address" style="width:100%" value="'+esc(f.addr||'')+'" onchange="S.fulf.addr=this.value"></div>':''}</div>
+<div class="row"><input id="cn" placeholder="Name" value="${esc(S.cname||'')}" onchange="S.cname=this.value"><input id="ce" type="email" placeholder="Email" value="${esc(S.email)}" onchange="S.email=this.value.trim().toLowerCase();render()"></div>
+<div class="row"><label>Loafy Points reward (balance ${bal}) <select id="rw"><option value="">None</option><option value="r5">50 pts: S$5 off</option><option value="r10">100 pts: S$10 off</option>${S.products.map(p=>`<option value="free:${p.id}">200 pts: free ${esc(p.name)}</option>`).join('')}</select></label></div>
+<p>Subtotal ${money(sub)}${f.type=='delivery'?' + delivery '+money(S.settings.fee):''}. Discounts apply when you place the order. <span class="mut">Payment is simulated; no card details are collected.</span></p>
+<button ${c.open?'':'disabled'} onclick="checkout()">Place order (simulated payment)</button> <span class="warn">${c.open?'':'Checkout is disabled while ordering is closed.'}</span>`}
+function qchg(k,d){const l=S.cart[k];l.qty+=d;if(l.qty<=0)S.cart.splice(k,1);go()}
+function setF(t,d){S.fulf={type:t,day:d,addr:(S.fulf||{}).addr};go()}
+function checkout(){const r=placeOrder(S.cart,{...S.fulf,addr:S.fulf.addr||''},{name:S.cname||'',email:S.email||''},$('#rw').value);
+if(!r.ok)return alert(r.msg);S.cart=[];S.view='account';go();alert('Order '+r.order.id+' confirmed. You earned '+r.order.pts+' Loafy Points.')}
+const story=()=>`<h2>Our story</h2><p style="max-width:62ch">Wholesome Loafy began in a student kitchen with one question: what if bread was made slowly, in small batches, with ingredients you can pronounce? We are students, baking between lectures, and every loaf is made to order so nothing is wasted. (Sample story text. Replace with your own.)</p>`;
+const how=()=>`<h2>How to order</h2><div class="x"><table><tr><th>When (Singapore time)</th><th>What happens</th></tr><tr><td>Mon 12:01 AM</td><td>Pre-orders open; every bread gets a fresh 20 units</td></tr><tr><td>Tue–Thu</td><td>Keep ordering while stock lasts</td></tr><tr><td>Fri 11:59 PM</td><td>Last minute to order</td></tr><tr><td>Saturday</td><td>Ordering closed; ingredients bought</td></tr><tr><td>Sunday</td><td>Baking day: pickup or local delivery</td></tr><tr><td>Following Monday</td><td>Remaining pickups from Sunday’s batch (a new ordering week has already opened)</td></tr></table></div>`;
+function account(){const e=S.email,os=S.orders.filter(o=>o.email==e),bal=S.points[e]||0;
+return`<h2>My account and rewards</h2><div class="row"><input id="ae" type="email" placeholder="Your email" value="${esc(e)}"><button onclick="S.email=$('#ae').value.trim().toLowerCase();go()">Show my account</button></div>${e?`<p><b>${bal} Loafy Points</b>. Earn 1 point per S$1 spent. Redeem at checkout: 50 pts = S$5 off, 100 pts = S$10 off, 200 pts = a free bread.</p>
+<h3>Purchase history</h3>${os.length?`<div class="x"><table>${os.slice().reverse().map(o=>`<tr><td>${o.id}<br><span class="mut">${o.placed}</span></td><td>${o.items.map(i=>i.qty+'× '+esc(i.name)+sl(i.slice)).join('<br>')}</td><td>${fd(o.sun)} batch<br>${o.fulfil.type} ${o.fulfil.day=='mon'?fd(addD(o.sun,1)):fd(o.sun)}</td><td>${money(o.total)}<br>${o.status}</td></tr>`).join('')}</table></div>`:'<p>No orders yet.</p>'}`:'<p>Enter the email you used at checkout. (Demo only: no password.)</p>'}`}
+// ---------- admin ----------
+const ST=['pending','confirmed','baking','ready for pickup','fulfilled','cancelled'];
+function admin(c){const T=[['orders','Orders'],['products','Products & stock'],['settings','Settings & pause'],['shop','Shopping list']];
+return`<h2>Admin dashboard <span class="mut" style="font-size:.8rem">(prototype: no login)</span></h2>${statusBar()}<div class="tabs">${T.map(t=>`<button class="${S.tab==t[0]?'':'alt'}" onclick="S.tab='${t[0]}';go()">${t[1]}</button>`).join('')}</div>`+({orders:aOrders,products:aProducts,settings:aSettings,shop:aShop}[S.tab])(c)}
+function batchSums(sun){const o={};S.orders.filter(x=>x.sun==sun&&x.status!='cancelled').forEach(x=>x.items.forEach(i=>{const k=i.pid;o[k]=o[k]||{n:0,s:0,w:0};o[k].n+=i.qty;if(i.slice=='sliced')o[k].s+=i.qty;if(i.slice=='whole')o[k].w+=i.qty}));return o}
+function aOrders(c){const suns=[...new Set([c.sunday,...S.orders.map(o=>o.sun)])].sort().reverse();return suns.map(s=>{const sm=batchSums(s),b=getBatch(s);return`<div class="card" style="margin-bottom:14px"><h3 style="margin:0">Baking batch: ${fd(s)} ${s==c.sunday?'(current)':''}</h3>
+<div class="x"><table><tr><th>Bread</th><th>Ordered</th><th>Sliced / unsliced</th><th>Remaining</th></tr>${S.products.map(p=>`<tr><td>${esc(p.name)}</td><td>${(sm[p.id]||{n:0}).n}</td><td>${p.slice?(sm[p.id]||{s:0}).s+' / '+(sm[p.id]||{w:0}).w:'n/a'}</td><td>${b[p.id].cap-b[p.id].sold} of ${b[p.id].cap}</td></tr>`).join('')}</table></div>
+${S.orders.filter(o=>o.sun==s).map(o=>`<details><summary>${o.id}: ${esc(o.name)}, ${money(o.total)}, ${o.status}</summary><div>${o.items.map(i=>i.qty+'× '+esc(i.name)+sl(i.slice)).join(', ')}<br>${o.fulfil.type=='delivery'?'Delivery '+fd(o.sun)+', '+esc(o.fulfil.addr):'Pickup '+(o.fulfil.day=='mon'?fd(addD(o.sun,1)):fd(o.sun))}<br>${esc(o.email)}<br><select onchange="setStatus('${o.id}',this.value)">${ST.map(x=>`<option ${x==o.status?'selected':''}>${x}</option>`).join('')}</select></div></details>`).join('')||'<p class="mut">No orders for this batch.</p>'}</div>`}).join('')}
+function aProducts(c){return S.products.map(p=>`<div class="card" style="margin-bottom:14px"><div class="row"><b>${p.emoji}</b><input value="${esc(p.name)}" onchange="upd('${p.id}','name',this.value)"> <label>Price S$<input type="number" step="0.5" style="width:80px" value="${p.price}" onchange="upd('${p.id}','price',+this.value)"></label><label>Weekly limit <input type="number" style="width:70px" value="${p.cap}" onchange="upd('${p.id}','cap',+this.value)"></label><span class="mut">Actual stock left (admin view): ${rem(p.id,c.sunday)}</span></div>
+<div class="row"><div class="th">${imgH(p.img,p.name,S.products.indexOf(p))}</div><input type="file" accept="image/*" onchange="upP('${p.id}',this)"><button class="sm alt" onclick="upd('${p.id}','img','')">Remove photo</button><label><input type="checkbox" ${p.slice?'checked':''} onchange="upd('${p.id}','slice',this.checked)"> Offer slicing option</label></div><textarea rows="2" onchange="upd('${p.id}','desc',this.value)">${esc(p.desc)}</textarea>
+${Object.keys(p.info).map(k=>`<div class="mut">${k}</div><textarea rows="2" onchange="updI('${p.id}','${k}',this.value)">${esc(p.info[k])}</textarea>`).join('')}
+<div class="mut">Recipe per 1 unit, one line each: ingredient, quantity, unit (e.g. “Bread flour, 500, g”). Left empty on purpose; nothing is invented.</div><textarea rows="3" onchange="upd('${p.id}','recipe',this.value)">${esc(p.recipe)}</textarea></div>`).join('')+'<button onclick="addProd()">+ Add product</button><p class="mut">Limit changes apply to the current batch (never below units already sold) and to future weeks. Images are emoji placeholders in this prototype.</p>'}
+function upd(id,k,v){const p=prod(id);p[k]=v;if(k=='cap'){const b=getBatch(cycle(now()).sunday)[id];b.cap=Math.max(v,b.sold)}save();render()}
+function updI(id,k,v){prod(id).info[k]=v;save()}
+function aSettings(){const s=S.settings,c=cycle(now()),sd=[0,1,2,3].map(i=>addD(c.sunday,7*i));
+return`<div class="card"><h3 style="margin-top:0">Manual pause (overrides the weekly schedule)</h3><div class="row"><button onclick="togglePause()">${s.paused?'Resume ordering':'Pause all orders now'}</button><span>${s.paused?'<b class="warn">Paused</b>':'<b class="ok">Running on schedule</b>'}</span></div><div class="row"><input style="width:100%" value="${esc(s.msg)}" onchange="S.settings.msg=this.value;save()"></div>
+<b>Pause a future baking week</b><div class="row">${sd.map(d=>`<label><input type="checkbox" ${s.pauseWeeks.includes(d)?'checked':''} onchange="pw('${d}',this.checked)"> ${fd(d)} batch</label>`).join('')}</div></div>
+<div class="card" style="margin-top:14px"><h3 style="margin-top:0">Fulfilment</h3><div class="row"><label>Delivery fee S$<input type="number" step="0.5" style="width:80px" value="${s.fee}" onchange="S.settings.fee=+this.value;save()"></label></div><div class="mut">Pickup times</div><input style="width:100%" value="${esc(s.pickupTimes)}" onchange="S.settings.pickupTimes=this.value;save()"><div class="mut">Delivery hours</div><input style="width:100%" value="${esc(s.delHours)}" onchange="S.settings.delHours=this.value;save()"><div class="mut">Service area</div><input style="width:100%" value="${esc(s.area)}" onchange="S.settings.area=this.value;save()"></div>${slidesCard()}`}
+const club=()=>`<h2>Bread Club</h2><p style="max-width:56ch">We’re exploring a future bread subscription. Leave your email to show interest and we’ll let you know. <b>No subscription or payment is active.</b></p><div class="row"><input id="be" type="email" placeholder="Email"><button onclick="joinClub()">Join the interest list</button></div><p class="mut">Prototype: emails are saved only in this browser.</p>`;
+function joinClub(){const e=$('#be').value.trim();if(!/.+@.+/.test(e))return alert('Please enter a valid email.');if(!S.club.includes(e))S.club.push(e);save();toast('Thanks! You’re on the interest list.')}
+const faq=()=>`<h2>Contact &amp; FAQ</h2><p class="mut">Sample answers. Edit the wording in code or ask to make them editable in Admin.</p>${[['When can I order?','Mondays 12:01 AM to Fridays 11:59 PM, Singapore time.'],['When is my bread ready?','Baked on Sunday. Collect Sunday or Monday, or choose Sunday delivery.'],['Is payment real?','No. This prototype uses simulated payment only.'],['How do I contact you?','Contact details to be added by the bakery.']].map(x=>`<details><summary>${x[0]}</summary><p>${x[1]}</p></details>`).join('')}`;
+function upImg(file,cb){if(!file)return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,1100/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);cb(c.toDataURL('image/jpeg',.8))};im.src=r.result};r.readAsDataURL(file)}
+const upP=(id,f)=>upImg(f.files[0],d=>{prod(id).img=d;save();render()}),upS=(i,f)=>upImg(f.files[0],d=>{S.slides[i].img=d;save();render()});
+const addProd=()=>{S.products.push(mk('p'+Date.now(),'New bread',10,'',false,'Short description.',SAMPLE,SAMPLE,SAMPLE,SAMPLE));save();render()};
+const slidesCard=()=>`<div class="card" style="margin-top:14px"><h3 style="margin-top:0">Homepage carousel photos</h3>${S.slides.map((s,i)=>`<div class="row"><div class="th">${imgH(s.img,s.cap,i)}</div><input value="${esc(s.cap)}" onchange="S.slides[${i}].cap=this.value;save()"><input type="file" accept="image/*" onchange="upS(${i},this)"><button class="sm alt" onclick="S.slides[${i}].img='';save();render()">Remove photo</button></div>`).join('')}<div class="mut">Photos are resized and stored in this browser (prototype).</div></div>`;
+function pw(d,on){const a=S.settings.pauseWeeks;if(on&&!a.includes(d))a.push(d);if(!on)S.settings.pauseWeeks=a.filter(x=>x!=d);save();render()}
+function aShop(c){const sun=S.shopSun||c.sunday,suns=[...new Set([c.sunday,...S.orders.map(o=>o.sun)])].sort(),need={};
+S.orders.filter(o=>o.sun==sun&&['confirmed','baking','ready for pickup','fulfilled'].includes(o.status)).forEach(o=>o.items.forEach(i=>need[i.pid]=(need[i.pid]||0)+i.qty));
+const tot={};S.products.forEach(p=>{(p.recipe||'').split('\n').forEach(l=>{const [n,q,u]=l.split(',').map(x=>x.trim());if(n&&q&&!isNaN(+q)&&need[p.id]){const k=n+'|'+(u||'');tot[k]=(tot[k]||0)+q*need[p.id]}})});
+return`<div class="row"><label>Batch <select onchange="S.shopSun=this.value;go()">${suns.map(s=>`<option value="${s}" ${s==sun?'selected':''}>${fd(s)}</option>`).join('')}</select></label></div><p>Confirmed production: ${S.products.map(p=>(need[p.id]||0)+' '+esc(p.name)).join('; ')}</p>
+${Object.keys(tot).length?`<h3>Saturday shopping list</h3><ul>${Object.entries(tot).map(([k,v])=>`<li>${esc(k.split('|')[0])}: ${Math.round(v*100)/100} ${esc(k.split('|')[1])}</li>`).join('')}</ul>`:'<p class="mut">No list yet. Enter recipe quantities per product in “Products & stock”; pending and cancelled orders are excluded.</p>'}`}
+// ---------- tests ----------
+function runTests(){const bak=JSON.stringify(S);S=defaults();S.demo=true;const out=[],t=(n,c)=>out.push(`<div>${c?'✅':'❌'} ${n}</div>`);
+const at=(d,h,m)=>{S.sim=Date.UTC(2026,9,26)+d*D+(h*60+m)*6e4},sun1='2026-11-01',sun2='2026-11-08',O=(pid,q,sl,type,day)=>placeOrder([{pid,slice:sl||null,qty:q}],{type:type||'pickup',day:day||'sun',addr:'x'},{name:'T',email:'t@t.sg'},'');
+at(0,0,0);t('Mon 12:00 AM: ordering closed',!cycle(S.sim).open);at(0,0,1);t('Mon 12:01 AM: ordering opens',cycle(S.sim).open);
+t('Fresh batch has exactly 20 per product',S.products.every(p=>rem(p.id,sun1)==20));
+at(2,12,0);O('sourdough',17,'sliced');t('Wed: 3 sourdough remaining',rem('sourdough',sun1)==3);
+let r=O('sourdough',4,'sliced');t('Buying 4 of 3 is blocked with a message',!r.ok&&/Only 3/.test(r.msg));
+O('sourdough',2,'sliced');O('sourdough',1,'whole');t('Sliced and unsliced share one stock; reaches 0 (sold out)',rem('sourdough',sun1)==0);
+const rr=[O('focaccia',20),0];t('Two orders for the last units: only one succeeds',(()=>{const a=O('cinnamon',1),b=(setLeft2('cinnamon',1),[O('cinnamon',1),O('cinnamon',1)]);return b[0].ok&&!b[1].ok&&rem('cinnamon',sun1)==0})());
+function setLeft2(p,n){const b=getBatch(sun1)[p];b.sold=b.cap-n}
+const oid=S.orders[S.orders.length-1];setStatus(S.orders.find(o=>o.items[0].pid=='cinnamon').id,'cancelled');t('Cancelling restores stock to the right batch',rem('cinnamon',sun1)==1);
+at(4,23,59);t('Fri 11:59 PM: final ordering minute',cycle(S.sim).open);t('Fri 11:59 PM: View & Order shown (stock left)',btnLabel(prod('cinnamon'),cycle(S.sim))=='View & Order');const snap=JSON.stringify(S.batches);at(5,0,0);t('Sat: ALL products View Details + 0 available to order',S.products.every(p=>btnLabel(p,cycle(S.sim))=='View Details'&&/0 Available/.test(avail(p).txt)));t('Sat: View-Only leaves real stock records unchanged',JSON.stringify(S.batches)===snap);t('Sat 12:00 AM: ordering closed',!cycle(S.sim).open&&O('focaccia',1).ok===0);
+at(6,10,0);t('Sunday: ordering closed',!cycle(S.sim).open);
+at(7,0,1);t('Next Monday: new batch has exactly 20 (no carry-over)',rem('cinnamon',sun2)==20&&rem('sourdough',sun2)==20);getBatch(sun2);t('Reset is idempotent (no double replenish)',rem('sourdough',sun2)==20);
+t('Old orders remain saved',S.orders.length>3&&S.orders[0].sun==sun1);
+t('Monday pickup still maps to previous Sunday batch',S.orders[0].sun==sun1&&addD(S.orders[0].sun,1)=='2026-11-02');
+at(8,9,0);S.settings.paused=true;t('Admin pause blocks ordering despite schedule',!cycle(S.sim).open&&!O('focaccia',1).ok);S.settings.paused=false;
+t('Delivery on Monday is rejected',!O('focaccia',1,null,'delivery','mon').ok);
+S=JSON.parse(bak);$('#tests').innerHTML=out.join('');render()}
+// ---------- boot ----------
+const $=s=>document.querySelector(s),$nav=$('#nav'),$app=$('#app');
+function tick(){$('#dclk').textContent=(S.demo?'DEMO ':'REAL ')+ft(now());document.querySelectorAll('.cd').forEach(e=>e.textContent=cd())}
+setInterval(()=>{if(!S.demo)S.sim=now();tick();if(cycle(now()).open!==window._o){window._o=cycle(now()).open;render()}},1000);
+render();
+</script></body></html>
